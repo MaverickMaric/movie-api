@@ -1,26 +1,13 @@
 const express = require('express')
-const movies = require('./movies')
-const { getAllMovies } = require('./controller/moviesController')
+const { getAllMovies, getMoviesByDir, getMoviesByTitle } = require('./controller/moviesController')
 
 const app = express()
 
 app.get('/movies', getAllMovies)
 
-app.get('/movies/:directors', (request, response) => {
-  const { directors } = request.params
+app.get('/movies/:directors', getMoviesByDir)
 
-  const foundDir = movies.filter((movie) => movie.directors === directors)
-
-  return response.send(foundDir)
-})
-
-app.get('/movies/:title', (request, response) => {
-  const { title } = request.params
-
-  const foundTitle = movies.filter((movie) => movie.title === title)
-
-  return response.send(foundTitle)
-})
+app.get('/movies/:title', getMoviesByTitle)
 
 
 app.listen(2095, () => {
