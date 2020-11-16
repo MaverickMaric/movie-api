@@ -1,14 +1,12 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const { getAllMovies, getMoviesByDir, getMoviesByTitle, saveNewMovie } = require('./controller/moviesController')
+const { getAllMovies, getMoviesByTitleOrDir, saveNewMovie } = require('./controller/moviesController')
 
 const app = express()
 
 app.get('/movies', getAllMovies)
 
-app.get('/movies/:directors', getMoviesByDir)
-
-app.get('/movies/:title', getMoviesByTitle)
+app.get('/movies/:input', getMoviesByTitleOrDir)
 
 app.post('/', bodyParser.json(), saveNewMovie)
 
